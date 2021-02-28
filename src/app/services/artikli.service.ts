@@ -14,7 +14,7 @@ export class ArtikliService {
       Authorization: "Bearer " + localStorage.getItem('token')
     })
   };
-  pageSize: Number=6;
+  pageSize: Number=5;
   constructor(private fb: FormBuilder, private http: HttpClient) { }
   readonly BaseURI = 'https://localhost:44367/api';
   formModel = this.fb.group({

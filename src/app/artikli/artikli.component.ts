@@ -105,6 +105,7 @@ dataSource = new MatTableDataSource();
 
 let dialogRef =  this.dialog.open(FormArtikliComponent, dialogConfig);
 dialogRef.afterClosed().subscribe(result => {
+  this.service.formModel.reset();
 this.search(1);
 });
 
@@ -113,10 +114,8 @@ redirectToUpdate(id: string){
 
   this.service.getById(id).subscribe(
     (res: any) => {
-
-
     if(res.response.success){
-     const model=res.response.model;
+      const model=res.response.model;
       this.service.setFormModel(model.naziv, model.sifra, model.fkJedinicaMjereId);
 
     }

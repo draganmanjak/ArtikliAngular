@@ -90,7 +90,7 @@ onSubmit() {
   if(this.data &&this.data.pkArtikliId){
     this.service.update(this.array,this.data.pkArtikliId).subscribe(
       (res: any) => {
-        if (res.success) {
+        if (res.response.success) {
           this.service.formModel.reset();
           this.toastr.success('Artikal je uspješno izmijenjen!', 'Uspješna izmjena artikla!.');
           this.save();
@@ -105,7 +105,7 @@ onSubmit() {
 else{
   this.service.create(this.array).subscribe(
     (res: any) => {
-      if (res.success) {
+      if (res.response.success) {
         this.service.formModel.reset();
         this.toastr.success('Novi artikal je kreiran!', 'Uspješno kreiranje artikla!.');
         this.save();
