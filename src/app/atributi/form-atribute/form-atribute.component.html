@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Dodavanje atributa</h2>
+
+<mat-dialog-content>
+  
+    <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()" >
+        <div class="form-group required">
+            <label>Naziv</label>
+            <input class="form-control" formControlName="Naziv">
+            <label class="text-danger" *ngIf="service.formModel.get('Naziv').touched && service.formModel.get('Naziv').errors?.required">Polje je obavezno.</label>
+          </div>
+          <div class="form-group">
+              <label>Jedinica mjere</label>
+              <select class="browser-default custom-select" (change)="changeUnit($event)"  formControlName="FkJedinicaMjereId">
+                <option value="" disabled>Izaberi jedinicu mjere</option>
+                <option value="1">kg</option>
+                <option value="2">l</option>
+                <option value="3">m</option>
+                <option value="4">cm</option>
+                <option value="5">dm</option>
+              </select>
+            
+            </div>
+            <div class="form-row ">
+                <div class="form-group buttons-modal col-md-8 offset-md-2">
+                  <button type="button" class="btn btn-lg btn-block" (click)="close()">Odustani</button>
+                  <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Sačuvaj</button>
+                </div>
+              </div>
+            </form>
+</mat-dialog-content>

@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-white">Upravljanje artiklima</a>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+  </nav>
+ <mat-tab-group (selectedTabChange)="selectTab($event)" [(selectedIndex)]="index">
+  <mat-tab   label="Artikli"routerLink='/artikli' routerLinkActive='active'> <div class="row">
+
+  </div></mat-tab>
+  <mat-tab label="Atributi" routerLink='/atributi' routerLinkActive='active'>  <div class="row">
+  
+  </div></mat-tab>
+</mat-tab-group>
+<router-outlet></router-outlet>

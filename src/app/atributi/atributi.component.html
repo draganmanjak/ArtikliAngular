@@ -1,0 +1,19 @@
+
+<button class="add-atribut" mat-raised-button (click)="openDialog()"> Dodati </button>
+
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th>Naziv</th>
+        <th>jedinicaMjere</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of data">
+        <td>{{ post.naziv }}</td>
+        <td>{{ post.jedinicaMjere }}</td>
+       
+      </tr>
+    </tbody>
+  </table>

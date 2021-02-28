@@ -1,0 +1,48 @@
+<form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()" >
+  <div class="register-grid">
+    <div class="form-group required">
+      <label>Ime</label>
+      <input class="form-control" formControlName="Ime">
+      <label class="text-danger" *ngIf="service.formModel.get('Ime').touched && service.formModel.get('Ime').errors?.required">Polje je obavezno.</label>
+    </div>
+    <div class="form-group required">
+        <label>Prezime</label>
+        <input class="form-control" formControlName="Prezime">
+        <label class="text-danger" *ngIf="service.formModel.get('Prezime').touched && service.formModel.get('Prezime').errors?.required">Polje je obavezno.</label>
+      </div>
+    <div class="form-group required" >
+      <label>Email</label>
+      <input class="form-control" formControlName="Email">
+      <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.required">Polje je obavezno.</label>
+      <label class="text-danger" *ngIf="service.formModel.get('Email').touched &&  service.formModel.get('Email').errors?.email">Neispravna email adresa.</label>
+    </div>
+    <div class="form-group required" >
+        <label>Broj telefona</label>
+        <input class="form-control" formControlName="BrojTelefona">
+        <label class="text-danger" *ngIf="service.formModel.get('BrojTelefona').touched && service.formModel.get('BrojTelefona').errors?.required ">Polje je obavezno.</label>
+      </div>
+    <div formGroupName="Passwords" class="passwords">
+      <div class="form-group required ">
+        <label>Lozinka</label>
+        <input type="password" class="form-control" formControlName="Password">
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">Polje je obavezno.</label>
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Obavezno minimum 4 karaktera.</label>
+        
+        <app-password-check [passwordToCheck]="service.formModel.value.Passwords.Password" [barLabel]="barLabel">  
+        </app-password-check>
+      </div>
+      <div class="form-group required ">
+        <label>Potvrdi lozinku</label>
+        <input type="password" class="form-control" formControlName="ConfirmPassword">
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">Polje je obavezno.</label>
+        <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">
+          Lozinke se ne podudaraju.</label>
+      </div>
+    </div>
+  </div>
+    <div class="form-row button-submit">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">Registruj se</button>
+      </div>
+    </div>
+  </form>

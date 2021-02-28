@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>{{data&&data.pkArtikliId? 'Izmjena artikla': 'Dodavanje artikla'}}</h2>
+
+<mat-dialog-content>
+
+    <form class="artikal-form" [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()" >
+        <div class="form-group required">
+            <label>Naziv</label>
+            <input class="form-control" formControlName="Naziv">
+            <label class="text-danger" *ngIf="service.formModel.get('Naziv').touched && service.formModel.get('Naziv').errors?.required">Polje je obavezno.</label>
+          </div>
+          <div class="form-group required">
+            <label>Sifra</label>
+            <input class="form-control" formControlName="Sifra">
+            <label class="text-danger" *ngIf="service.formModel.get('Sifra').touched && service.formModel.get('Sifra').errors?.required">Polje je obavezno.</label>
+          </div>
+          <div class="form-group required">
+              <label>Jedinica mjere</label>
+              <select class="browser-default custom-select" (change)="changeUnit($event)"  formControlName="FkJedinicaMjereId">
+                <option value="" disabled>Izaberi jedinicu mjere</option>
+                <option value="1">kg</option>
+                <option value="2">l</option>
+                <option value="3">m</option>
+                <option value="4">cm</option>
+                <option value="5">dm</option>
+              </select>
+              <label class="text-danger" *ngIf="service.formModel.get('FkJedinicaMjereId').touched && service.formModel.get('FkJedinicaMjereId').errors?.required">Polje je obavezno.</label>
+            </div>
+            <!-- <div class="form-group" *ngFor="let result of atributs; let i=index">
+                <label>{{result.naziv }}{{result.pkAtributId}}</label>
+                <input  class="form-control"  ng-model="array[pkAtributId]">
+            </div> -->
+            <div  class="form-group" *ngFor="let atribut of atributs; let i=index"> 
+                <!-- Use the index for each formGroup inside the formArray -->
+                <div >
+                <label>{{atribut.naziv}} </label>
+                  <input dynamic="true"  class="form-control"  (change)="onChangeEvent($event, atribut)" />
+                </div>
+              </div>
+        
+            <div class="buttons">
+               
+                  <button type="button" class="btn btn-lg btn-block" (click)="close()">Odustani</button>
+                  <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid">{{data && data.pkArtikliId? 'Sačuvaj': 'Dodaj'}}</button>
+          
+              </div>
+            </form>
+</mat-dialog-content>

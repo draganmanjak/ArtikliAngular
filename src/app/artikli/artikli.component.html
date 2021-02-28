@@ -1,0 +1,49 @@
+<div class="add-column">
+<button mat-button (click)="openDialog(null)"> Dodati </button>
+</div>
+
+<form class="search-card" [formGroup]="service.formSearchModel" autocomplete="off" (submit)="searchByQuery()" >
+  <div class="form-group">
+      <label>Sifra</label>
+      <input class="form-control" formControlName="Sifra">
+    
+    </div>
+    <div class="form-group ">
+      <label>Naziv</label>
+      <input class="form-control" formControlName="Naziv">
+     
+    </div>
+    <div class="form-group" id="dynamicinputs" *ngFor="let atribut of atributs; let i=index"> 
+
+      <div >
+      <label>{{atribut.naziv}} </label>
+        <input class="form-control" #dynamicInput (change)="onChangeEventInputs($event, atribut)" />
+      </div>
+    </div>
+      <div class="search-buttons ">
+  
+            <button type="button" class="btn btn-lg btn-block" (click)="resetSearch()">Poništi pretragu</button>
+            <button type="submit" class="btn btn-lg btn-block">Pretraži</button>
+         
+        </div>
+</form>
+<table *ngIf="dataSource" mat-table [dataSource]="dataSource">
+  <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ col!='update' &&col!='delete'?col:'' }} </th>
+    <td class="action-table" mat-cell *matCellDef="let element"> {{ element[col] }}
+       <button *ngIf="col=='update'" mat-raised-button color="green" (click)="redirectToUpdate(element.pkArtikliId)">
+      <mat-icon class="mat-18">Izmijeniti</mat-icon>
+  </button>  
+  <button *ngIf="col=='delete'" mat-raised-button color="warn" (click)="redirectToDelete(element.pkArtikliId)">
+    <mat-icon class="mat-18">Obrisati</mat-icon>
+</button>  
+</td>
+
+</ng-container>
+
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [length]="totalPages" [hidePageSize]="true"  [pageIndex]="pageNum" [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]"  (page)="getNext($event)">
+  </mat-paginator>
