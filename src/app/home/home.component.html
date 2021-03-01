@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand text-white">Upravljanje artiklima</a>
-    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Izloguj se</button>
+    <button class="btn btn-warning my-2 my-sm-0 text-black-50" (click)="onLogout()">Izloguj se</button>
   </nav>
  <mat-tab-group (selectedTabChange)="selectTab($event)" [(selectedIndex)]="index">
   <mat-tab   label="Artikli"routerLink='/artikli' routerLinkActive='active'> <div class="row">
