@@ -23,23 +23,23 @@ export class AtributiComponent implements OnInit {
   "searching":     false,
   };
   ngOnInit(): void {
-    this.service.getAll().subscribe(
-      (res: any) => {
-        if (res.success) {
-       this.data=res.list;
-       console.log("🚀 ~ file: atributi.component.ts ~ line 22 ~ AtributiComponent ~ ngOnInit ~ this.data", this.data)
-        }
-      },
-      (error: any) => {                           
-       
-      }
-    );
-
+      this.getAll();
   }
   refresh(){
-
   }
-
+  getAll(){
+  this.service.getAll().subscribe(
+    (res: any) => {
+      if (res.success) {
+     this.data=res.list;
+     console.log("🚀 ~ file: atributi.component.ts ~ line 22 ~ AtributiComponent ~ ngOnInit ~ this.data", this.data)
+      }
+    },
+    (error: any) => {                           
+     
+    }
+  );
+}
   openDialog() {
 
     const dialogConfig = new MatDialogConfig();
@@ -54,6 +54,10 @@ export class AtributiComponent implements OnInit {
     top: '0',
     left: '0'
 };
-    this.dialog.open(FormAtributeComponent, dialogConfig);
+let dialogRef = this.dialog.open(FormAtributeComponent, dialogConfig);
+dialogRef.afterClosed().subscribe(result => {
+      this.service.formModel.reset();
+    this.getAll();
+    });
 }
 }
