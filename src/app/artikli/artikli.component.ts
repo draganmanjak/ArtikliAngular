@@ -70,7 +70,7 @@ dataSource = new MatTableDataSource();
     this.service.search(this.array,pageNum).subscribe(
       (res: any) => {
       let data=[];
-      res.artikli.forEach((artikal)=>{
+      res.response.model.artikli.forEach((artikal)=>{
         var obj :any = {'pkArtikliId':artikal.pkArtikliId, 'Šifra':artikal.sifra,'Naziv':artikal.naziv}
         artikal.atributiArtikla.forEach((atributArtikla)=>{
           const atrNaziv=atributArtikla.naziv;
@@ -79,11 +79,9 @@ dataSource = new MatTableDataSource();
         }) 
         data.push(obj)
       })
-    
-
        this.dataSource = new MatTableDataSource(data);
-       this.pageNum=res.pagNum;
-       this.totalPages=res.totalPages;
+       this.pageNum= res.response.model.pageNum;
+       this.totalPages=res.response.model.totalPages;
       },
       (error: any) => {                           
        
